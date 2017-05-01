@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Model\HBCities;
+use App\Model\HBHobbies;
 use App\Model\HBPeople;
 use Illuminate\Routing\Controller;
 
@@ -14,9 +15,7 @@ class HBPeopleController extends Controller {
      */
 	public function index()
 	{
-
 	    return "All people";
-
 	}
 
 	public function form()
@@ -24,9 +23,9 @@ class HBPeopleController extends Controller {
 
         $configuration['cities'] = HBCities::all()->pluck('name', 'id')->toArray();
 
+        $configuration['hobbies'] = HBHobbies::all()->pluck('name', 'id')->toArray();
 
-
-        //dd($configuration);
+//        dd($configuration);
 
 		return view('content.form_person', $configuration);
 	}
@@ -41,6 +40,12 @@ class HBPeopleController extends Controller {
             'phone' => $data['phone'],
             'hb_cities_id' => $data['city'],
             ]);
-	}
 
+        $record->connection()->sync($data['hobbies']);
+
+        $record['cities'] = HBCities::all()->pluck('name', 'id')->toArray();
+        $record['hobbies'] = HBHobbies::all()->pluck('name', 'id')->toArray();
+
+        return view('content.form_person', $record);
+	}
 }

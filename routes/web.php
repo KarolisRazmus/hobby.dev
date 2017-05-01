@@ -25,7 +25,7 @@ Route::group(['prefix' => 'people'], function() {
        'uses' => 'HBPeopleController@form'
     ]);
 
-    Route::post('/from/', [
+    Route::post('/form/', [
         'as' => 'create.person',
         'uses' => 'HBPeopleController@addPerson'
     ]);

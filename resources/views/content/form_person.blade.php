@@ -22,6 +22,12 @@
 
         {{Form::select('city',$cities)}}<br/>
 
+        <ul>
+            @foreach($hobbies as $key => $hobby)
+                <li>{{Form::label($hobby, $hobby)}}
+                    {{Form::checkbox('hobbies[]', $key)}}</li>
+            @endforeach
+        </ul>
 
         {!! Form::submit('Add Person!') !!}
 
