@@ -14,3 +14,27 @@
 Route::get('/', function () {
     return view('welcome');
 });
+
+Route::group(['prefix' => 'people'], function() {
+    Route::get('/', [
+       'uses' => 'HBPeopleController@index'
+    ]);
+});
+
+Route::group(['prefix' => 'cities'], function (){
+    Route::get('/', [
+        'uses' => 'HBCitiesController@index'
+    ]);
+});
+
+Route::group(['prefix' => 'hobbies'], function (){
+    Route::get('/', [
+       'uses' => 'HBHobbiesController@index'
+    ]);
+});
+
+Route::group(['prefix' => 'connections'], function (){
+    Route::get('/', [
+        'uses' => 'HBPeopleHobbiesConnectionsController@index'
+    ]);
+});
